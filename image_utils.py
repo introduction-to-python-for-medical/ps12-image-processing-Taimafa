@@ -3,7 +3,15 @@ import numpy as np
 from scipy.signal import convolve2d
 
 def load_image(path):
-    pass # Replace the `pass` with your code
-
-def edge_detection(image):
-    pass # Replace the `pass` with your code
+    image= image.open(path)
+    image_array = np.arra(image)
+    return image_array
+    
+def edge_detection(image_array):
+    gray_image = np.mean(image_array, axis=2)
+    kernelY = np.array([[1, 2, 1], [0, 0, 0], [-1, -2, -1]])
+    kernelX = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
+    edgeX = convolve2d(gray_image, kernelX, mode='same', boundary='symm')
+    edgeY = convolve2d(gray_image, kernelY, mode='same', boundary='symm')
+    edgeMAG = np.sqrt(edgeX**2 + edgeY**2)
+    return edgeMAG
