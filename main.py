@@ -4,6 +4,6 @@ from skimage.morphology import ball
 from PIL import Image
 lena=load_image('lena.jpg')
 clean=median(lena, ball(3))
-binary=l_edge > 100
+binary= l_edge > 100
 edge_image = Image.fromarray(np.uint8(binary * 255))
 edge_image.save('my_edges.png')
